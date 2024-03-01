@@ -1,0 +1,183 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AMS Beamer series / Bologna FC / Template
+% Andrea Omicini
+% Alma Mater Studiorum - Università di Bologna
+% mailto:andrea.omicini@unibo.it
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[handout]{beamer}\mode<handout>{\usetheme{default}}
+%
+\documentclass[presentation, 10pt]{beamer}\mode<presentation>{\usetheme{AMSBolognaFC}}
+%\documentclass[handout]{beamer}\mode<handout>{\usetheme{AMSBolognaFC}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{lmodern}
+\usefonttheme{professionalfonts}
+\usepackage{arev}
+\usepackage{multicol}
+\usepackage{wasysym}
+\usepackage{amsmath,blkarray}
+\usepackage{centernot}
+\usepackage{fontawesome}
+\usepackage{fancyvrb}
+\usepackage[ddmmyyyy]{datetime}
+\renewcommand{\dateseparator}{}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\version}{1}
+\usepackage{biblatex}
+	\makeatletter
+
+\addbibresource{biblio.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[Leveraging LLMs in Software Engineering]
+{Leveraging Large Language Models in Software Engineering}
+%
+\subtitle[Techniques, Challenges, and Opportunities]
+{Techniques, Challenges, and Opportunities}
+%
+\author[\sspeaker{Aguzzi}]
+{\speaker{Gianluca Aguzzi} \href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it}}
+%
+\institute[DISI, Univ.\ Bologna]
+{Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna}
+%
+\renewcommand{\dateseparator}{/}
+\date[\today]{\today}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\nocite{*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%/////////
+\frame{\titlepage}
+%/////////
+%% print toc
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+%===============================================================================
+
+\section{Introduction to LLMs}
+\begin{frame}[plain]
+\centering
+\huge{
+	\textbf{Natural Language Processing} (NLP)
+}
+\\[1em]
+\large{
+	\only<2, 3>{A subfield of artificial intelligence that focuses \emph{understanding}, \emph{interpreting}, and \emph{generating} human language.}
+	
+}
+
+\vspace{1em}
+\small{
+	\only<3>{
+		\textbf{Resources}
+	\begin{itemize}
+		\item \url{https://github.com/keon/awesome-nlp?tab=readme-ov-file}
+		\item \url{https://github.com/brianspiering/awesome-dl4nlp}
+		\item \url{https://nlpprogress.com/}
+		\item \url{https://www.unibo.it/it/studiare/dottorati-master-specializzazioni-e-altra-formazione/insegnamenti/insegnamento/2023/412644}
+	\end{itemize}	
+	}
+}
+\end{frame}
+\begin{frame}{Natural Language Processing}
+	\begin{alertblock}{Goal}
+		Identify the structure and meaning of \emph{words}, \emph{phases}, and \emph{sentences} in order to enable computers to understand and generate human language.
+	\end{alertblock}
+	\begin{exampleblock}{Why?}
+		Improve \emph{human-computer} interaction, closing the gap between \emph{human communication} and \emph{computer understanding}.
+	\end{exampleblock}
+	\begin{alertblock}{Applications \textbf{(all around us)}}
+		\begin{multicols}{2}
+			\begin{itemize}
+				\item \emph{Chatbots}
+				\item \emph{Machine Translation}
+				\item \emph{Speech Recognition}
+				\item \emph{Sentiment Analysis}
+				\item \emph{Question Answering}
+				\item \emph{Code Generation}
+			\end{itemize}
+		\end{multicols}
+	\end{alertblock}
+\end{frame}
+\begin{frame}{Natural Language Processing}
+    \begin{alertblock}{Challenges}
+        \begin{itemize}
+            \item \textbf{Ambiguity:} Multiple meanings for words/phrases.
+            \item \textbf{Context:} Meaning shifts with context (linguistic, cultural).
+            \item \textbf{Syntax:} Sentence structure affects meaning.
+            \item \textbf{Sarcasm/Idioms:} Non-literal language interpretation.
+        \end{itemize}
+    \end{alertblock}
+    
+    \begin{exampleblock}{Approaches}
+        \begin{itemize}
+            \item \textbf{Rule-Based:} Hand-crafted linguistic rules (e.g., \href{https://en.wikipedia.org/wiki/Georgetown-IBM\_experiment}{Georgetown–IBM}).
+            \item \textbf{Statistical:} Probabilistic language modelling (e.g., hidden Markov model~\cite{DBLP:journals/coling/Merialdo94}).
+            \item \textbf{ML/Deep Learning:} Algorithms learn from data; neural networks model complex patterns (RNN, LSTM, etc.).
+            \item[\faArrowRight] we will focus on \emph{\textbf{Language Models}}.
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}[plain]
+	\centering
+	\huge{
+		What is a \textbf{Language Model}?
+	}
+	\\[1em]
+	\large{
+		\only<2>{A \emph{machine learning} model that aims to predict and generate plausible text.}
+	}
+\end{frame}
+\begin{frame}{Language Models}
+	\begin{exampleblock}{Idea}
+		text is a sequence of words, and language models learn the \emph{probability} of a word given the previous words.
+	\end{exampleblock}
+	\begin{exampleblock}{Example}
+		\begin{itemize}
+			\item \emph{The cat is on the <*>}
+			\item \emph{The cat is on the \textbf{mat}.}
+			\item \emph{The cat is on the \textbf{table}.}
+		\end{itemize}
+	\end{exampleblock}
+	\begin{alertblock}{Tasks}
+		\begin{itemize}
+			\item \emph{Prediction:} Given a sequence of words, predict the next word (e.g., autocomplete).
+			\item \emph{Classification:} Given a sequence of words, classify the text (e.g., sentiment analysis).
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+\section{Machine Learning for Software Engineering}
+
+\section{LLMs in Software Engineering}
+
+\section{LLMs for Software Testing}
+
+\section{Innovative Solutions for LLMs -- autonomous agent models}
+%===============================================================================
+
+%/////////
+\frame{\titlepage}
+%/////////
+
+%===============================================================================
+\section*{\refname}
+%===============================================================================
+
+%%%%
+\setbeamertemplate{page number in head/foot}{}
+%/////////
+\begin{frame}[c,noframenumbering, allowframebreaks]{\refname}
+%\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
+	\tiny
+	\printbibliography
+\end{frame}
+%/////////
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
