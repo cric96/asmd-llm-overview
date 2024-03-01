@@ -66,21 +66,19 @@
 }
 \\[1em]
 \large{
-	\only<2, 3>{A subfield of artificial intelligence that focuses \emph{understanding}, \emph{interpreting}, and \emph{generating} human language.}
-	
+	{A subfield of artificial intelligence that focuses \emph{understanding}, \emph{interpreting}, and \emph{generating} human language.}
 }
 
 \vspace{1em}
 \small{
-	\only<3>{
-		\textbf{Resources}
+	\textbf{Resources}
 	\begin{itemize}
 		\item \url{https://github.com/keon/awesome-nlp?tab=readme-ov-file}
 		\item \url{https://github.com/brianspiering/awesome-dl4nlp}
 		\item \url{https://nlpprogress.com/}
 		\item \url{https://www.unibo.it/it/studiare/dottorati-master-specializzazioni-e-altra-formazione/insegnamenti/insegnamento/2023/412644}
 	\end{itemize}	
-	}
+	
 }
 \end{frame}
 \begin{frame}{Natural Language Processing}
@@ -112,12 +110,11 @@
             \item \textbf{Sarcasm/Idioms:} Non-literal language interpretation.
         \end{itemize}
     \end{alertblock}
-    
     \begin{exampleblock}{Approaches}
         \begin{itemize}
             \item \textbf{Rule-Based:} Hand-crafted linguistic rules (e.g., \href{https://en.wikipedia.org/wiki/Georgetown-IBM\_experiment}{Georgetown–IBM}).
             \item \textbf{Statistical:} Probabilistic language modelling (e.g., hidden Markov model~\cite{DBLP:journals/coling/Merialdo94}).
-            \item \textbf{ML/Deep Learning:} Algorithms learn from data; neural networks model complex patterns (RNN~\cite{DBLP:journals/corr/0001KYS17}, LSTM~\cite{DBLP:journals/neco/HochreiterS97}, GRU~\cite{DBLP:conf/mwscas/DeyS17}, etc.).
+            \item \textbf{ML/Deep Learning:} Algorithms learn from data; neural networks model complex patterns (RNN~\cite{DBLP:journals/corr/0001KYS17}, LSTM~\cite{DBLP:journals/neco/HochreiterS97}, GRU~\cite{DBLP:conf/mwscas/DeyS17}).
             \item[\faArrowRight] we will focus on \emph{\textbf{Language Models}}.
         \end{itemize}
     \end{exampleblock}
@@ -130,7 +127,7 @@
 	}
 	\\[1em]
 	\large{
-		\only<2>{A \emph{machine learning} model that aims to predict and generate plausible text.}
+		{A \emph{machine learning} model that aims to predict and generate plausible text.}
 	}
 \end{frame}
 \begin{frame}{Language Models}
@@ -151,8 +148,109 @@
 		\end{itemize}
 	\end{alertblock}
 \end{frame}
-\section{Machine Learning for Software Engineering}
+\begin{frame}{Language Models -- Phases}
+    \begin{enumerate}
+        \item \textbf{Tokenization}: Split text into words, phrases, symbols, etc. \\
+        \begin{itemize}
+			\item \textit{Example:} "Hello, world!" $\rightarrow$ ["Hello", ",", "world", "!"]
+		\end{itemize}
+        \item \textbf{Embedding}: Convert words into numerical vectors.
+        \begin{itemize}
+			\item \textit{Example:} "Hello" $\rightarrow$ [0.25, -0.75, 0.5, 1.0]
+			\item it is possible to used pretrained embeddings (e.g., Word2Vec,  BERT).
+		\end{itemize}
+        
+        \item \textbf{Modelling}: Learn the probability of a word given the previous words.
+        \begin{itemize}
+			\item \textit{Example:} P("world" | "Hello,") $\rightarrow$ 0.8
+		\end{itemize}
+        \item \textbf{Generation/Classification}: Use the model to generate text or classify it. \\
+        \begin{itemize}
+			\item \textit{Example for Generation:} Input: "The weather is" $\rightarrow$ Output: "sunny." \\
+			\item     \textit{Example for Classification:} Input: "This is a spam email." $\rightarrow$ Output: Spam
+     
+		\end{itemize}
+    \end{enumerate}
+\textbf{Note:} each NLP solution can use different techniques for each phase.
+\end{frame}
+\begin{frame}[fragile]{Language Models -- Recurrent Neural Networks}
 
+\includegraphics[width=\textwidth]{img/text-generation.png}
+
+\end{frame}
+
+\begin{frame}{Language Models -- Convolutional Networks}
+
+\includegraphics[width=\textwidth]{img/cnn-text.png}
+
+\end{frame}
+
+\begin{frame}{RNN and CNN -- Limitations}
+\begin{itemize}
+	\item \textbf{RNN:} Long-term dependencies are hard to capture.
+	\item \textbf{RNN:} Slow to train; not suitable for large-scale data.
+	\item \textbf{CNN:} Fixed-size input; not suitable for variable-length text
+	\item \textbf{Both:} Struggle with large-scale data.
+	\item \textbf{Solution:} \emph{Multi-head attention}: that is the core of \emph{transformers}.
+\end{itemize}
+\end{frame}
+\begin{frame}{Language Models -- Transformers~\cite{DBLP:conf/nips/VaswaniSPUJGKP17}}
+\includegraphics[width=\textwidth]{img/transformers.png}
+\centering{
+\url{https://www.youtube.com/watch?v=4Bdc55j80l8}
+\url{https://www.youtube.com/watch?v=SZorAJ4I-sA}
+
+}
+\end{frame}
+
+\begin{frame}[plain]
+	\huge{
+		\textbf{Large Language Model} (LLM)
+	}\\[1em]
+	\large{
+		{A \emph{language model} with a \emph{large} number of parameters, trained on a \emph{large} corpus of text.}
+	}
+\end{frame}
+
+\begin{frame}{LLM -- Implementation Strategies}
+    \begin{itemize}
+        \item \textbf{Transformers} as the foundational architecture, characterized by:
+        \begin{itemize}
+            \item Long-range context (\emph{Attention})
+            \item Efficient large-scale training (\emph{Parallelization})
+            \item Model growth (\emph{Scalability})
+        \end{itemize}
+        \item \textbf{Pretraining:} Involves training the model on a vast corpus of text to learn a wide range of language patterns and structures.
+        \item \textbf{Fine-tuning:} Refines the pretrained model for specific tasks, enhancing its applicability and performance on targeted applications.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{LLM -- Training Paradigms}
+\textbf{The Learning Cake:} An analogy to describe the layered approach in training methodologies.
+\begin{itemize}
+    \item \textbf{Self-supervised Learning:} Models learn patterns from unlabelled data, reducing the need for expensive annotations. Ideal for initial \emph{understanding} of language structures.
+    \item \textbf{Supervised Learning:} Enhances accuracy with labeled data, crucial for tasks requiring specific outcomes like \emph{classification} and \emph{translation}.
+    \item \textbf{Reinforcement Learning:} Adapts through trial and error using rewards, fine-tuning decision-making skills in scenarios like \emph{dialogue generation}.
+\end{itemize}
+\end{frame}
+\begin{frame}{LLM -- Paradigm Shift}
+	\centering
+	\includegraphics[height=7.5cm]{img/llm-idea.jpg}
+\end{frame}
+\begin{frame}{LLM -- Scalability}
+	\includegraphics[width=\textwidth]{img/over-year.jpg}
+\end{frame}
+\begin{frame}{LLM -- Scalability}
+	\includegraphics[width=\textwidth]{img/image-size.png}
+\end{frame}
+\begin{frame}{LLM -- Emergent Properties}
+\includegraphics[width=0.35\textwidth]{img/small.jpg}
+\includegraphics[width=0.55\textwidth]{img/medium.jpg}
+\centering
+\includegraphics[width=0.8\textwidth]{img/big.jpg}
+
+\end{frame}
+\section{Machine Learning for Software Engineering}
 \section{LLMs in Software Engineering}
 
 \section{LLMs for Software Testing}
