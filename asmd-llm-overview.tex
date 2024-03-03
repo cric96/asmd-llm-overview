@@ -31,8 +31,8 @@
 \title[Leveraging LLMs in Software Engineering]
 {Leveraging Large Language Models in Software Engineering}
 %
-\subtitle[Techniques, Challenges, and Opportunities]
-{Techniques, Challenges, and Opportunities}
+\subtitle[Research, Prospectives, Concerns]
+{Research, Perspectives, Concerns}
 %
 \author[\sspeaker{Aguzzi}]
 {\speaker{Gianluca Aguzzi} \href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it}}
@@ -59,6 +59,10 @@
 %===============================================================================
 
 \section{Introduction to LLMs}
+\begin{frame}{Today Lesson in a Nutshell}
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/meme.jpg}
+\end{frame}
 \begin{frame}[plain]
 \centering
 \huge{
@@ -81,6 +85,7 @@
 	
 }
 \end{frame}
+
 \begin{frame}{Natural Language Processing}
 	\begin{alertblock}{Goal}
 		Identify the structure and meaning of \emph{words}, \emph{phases}, and \emph{sentences} in order to enable computers to understand and generate human language.
@@ -150,21 +155,20 @@
 \end{frame}
 \begin{frame}{Language Models -- Phases}
     \begin{enumerate}
-        \item \textbf{Tokenization}: Split text into words, phrases, symbols, etc. \\
+        \item \textbf{Tokenization}: split text into words, phrases, symbols, etc. \\
         \begin{itemize}
 			\item \textit{Example:} "Hello, world!" $\rightarrow$ ["Hello", ",", "world", "!"]
 		\end{itemize}
-        \item \textbf{Embedding}: Convert words into numerical vectors.
+        \item \textbf{Embedding}: convert words into numerical vectors.
         \begin{itemize}
 			\item \textit{Example:} "Hello" $\rightarrow$ [0.25, -0.75, 0.5, 1.0]
 			\item it is possible to used pretrained embeddings (e.g., Word2Vec,  BERT).
 		\end{itemize}
-        
-        \item \textbf{Modelling}: Learn the probability of a word given the previous words.
+        \item \textbf{Modelling}: learn the probability of a word given the previous words.
         \begin{itemize}
 			\item \textit{Example:} P("world" | "Hello,") $\rightarrow$ 0.8
 		\end{itemize}
-        \item \textbf{Generation/Classification}: Use the model to generate text or classify it. \\
+        \item \textbf{Generation/Classification}: use the model to generate text or classify it. \\
         \begin{itemize}
 			\item \textit{Example for Generation:} Input: "The weather is" $\rightarrow$ Output: "sunny." \\
 			\item     \textit{Example for Classification:} Input: "This is a spam email." $\rightarrow$ Output: Spam
@@ -187,10 +191,10 @@
 
 \begin{frame}{RNN and CNN -- Limitations}
 \begin{itemize}
-	\item \textbf{RNN:} Long-term dependencies are hard to capture.
-	\item \textbf{RNN:} Slow to train; not suitable for large-scale data.
-	\item \textbf{CNN:} Fixed-size input; not suitable for variable-length text
-	\item \textbf{Both:} Struggle with large-scale data.
+	\item \textbf{RNN:} long-term dependencies are hard to capture.
+	\item \textbf{RNN:} slow to train; not suitable for large-scale data.
+	\item \textbf{CNN:} fixed-size input window; not suitable for variable-length text
+	\item \textbf{Both:} struggle with large-scale data.
 	\item \textbf{Solution:} \emph{Multi-head attention}: that is the core of \emph{transformers}.
 \end{itemize}
 \end{frame}
@@ -237,6 +241,24 @@
 	\centering
 	\includegraphics[height=7.5cm]{img/llm-idea.jpg}
 \end{frame}
+\begin{frame}{LLM -- Adaptation}
+	\begin{itemize}
+			\item \textbf{Fine-tuning:} Adapt model to specific tasks through supervision.
+			
+			\item \textbf{Prompting:} Guide model to specific outputs.
+			\begin{itemize}
+					\item \emph{Zero-shot learning:} Direct instruction for desired outcome without fine-tuning.
+					\item \emph{Few-shot learning:} Use minimal examples in prompt for in-context learning.
+					\begin{itemize}
+							\item \textbf{Example:} Summarization with few example summaries.
+							\item \textbf{RAG:} Retrieval-Augmented Generation for information-rich answers.
+					\end{itemize}
+					\item \emph{Chain-of-thought:} Break down problems into intermediate steps.
+					\item \emph{Analogical reasoning:} Solve by drawing parallels to known scenarios.
+					\item More examples will be shown in SE applications.
+			\end{itemize}
+	\end{itemize}
+	\end{frame}
 \begin{frame}{LLM -- Scalability}
 	\includegraphics[width=\textwidth]{img/over-year.jpg}
 \end{frame}
@@ -248,18 +270,230 @@
 \includegraphics[width=0.55\textwidth]{img/medium.jpg}
 \centering
 \includegraphics[width=0.8\textwidth]{img/big.jpg}
-
 \end{frame}
-\begin{frame}{LLM -- Training Cost}
+\begin{frame}{LLM -- State-of-the-art foundational models}
+	\begin{itemize}
+		\item \textbf{GPT-4/3} \faLock: generative Pre-trained Transformer (OpenAI)
+		\begin{itemize}
+			\item State-of-the-art in \emph{language generation} and \emph{translation}.
+			\item GPT-4 is multi-modal, capable of processing text, images, and audio.
+		\end{itemize}
+		\item \textbf{Gemini} \faLock: most capable multi-modal model from Google.
+		\item \textbf{Llama} (1/2) \faUnlock: Large Language Model Meta AI (Meta) 
+		\begin{itemize}
+			\item One of the first open source LLMs with a relevant number of parameters.
+		\end{itemize}
+		\item \textbf{Mistral/Mixtral/Falcon} \faUnlock: several completely open and transparent models from several companies. 
+	\end{itemize}
+\centering
+More at: \url{https://lifearchitect.ai/models-table/}
+\end{frame}
+\begin{frame}{LLM applications: Chatbots}
+\includegraphics[width=\textwidth]{img/image.pdf}
+\end{frame}
+\begin{frame}{LLM applications: Medical Diagnosis}
+\includegraphics[width=\textwidth]{img/palm-med.png}
+\end{frame}
+\begin{frame}{Robotics}
+	\centering
+	\includegraphics[width=0.9\textwidth]{img/generalistic-agent.jpeg}
+\end{frame}
+\begin{frame}{LLM Applications: Code Generation}
+\includegraphics[width=\textwidth]{img/copilot.png}
+\end{frame}
+\begin{frame}{LLM Concerns -- Training Cost}
 \centering
 \includegraphics[width=0.8\textwidth]{img/training-cost.jpg}
 \end{frame}
+\begin{frame}{LLM Concerns -- Privacy}
+	\includegraphics[width=\textwidth]{img/italy-privacy-concern.png}
+\end{frame}
+\begin{frame}{LLM Concerns -- Hallucination}
+\emph{Hallucination} is the generation of text that is not grounded in reality.
+\includegraphics[width=\textwidth]{img/hallucinations.png}
+\end{frame}
 \section{Machine Learning for Software Engineering}
-\section{LLMs in Software Engineering}
+\begin{frame}[plain]
+\centering
+\huge{Machine Learning for Software Engineering}
+\\[1em]
+\large{
+Application of machine learning \emph{techniques} and \emph{methodologies} to address challenges and solve problems in the field of software engineering}
+\\[1em]
+\includegraphics[width=0.7\textwidth]{img/pubblication-over-year.png}
+\end{frame}
+\begin{frame}{Machine Learning for Software Engineering}
+\begin{exampleblock}{Why?}
+	\begin{itemize}
+	\item \textbf{Automation:} automate repetitive tasks (e.g., code generation).
+	\item \textbf{Prediction:} predict software quality, bugs, and performance.
+	\item \textbf{Optimization:} optimize software development processes.
+	\item \textbf{Understanding:} understand software artifacts and processes.
+	\item \textbf{Personalization:} personalize software development tools.
+\end{itemize}
+\end{exampleblock}
+\begin{exampleblock}{When?}
+	\begin{itemize}
+		\item \textbf{Requirement Engineering:} requirements elicitation and analysis.
+		\item \textbf{Design:} design patterns, architecture, and modeling.
+		\item \textbf{Implementation:} code generation, refactoring, and bug fixing.
+		\item \emph{\textbf{Testing:}} test case generation, fault prediction...
+		\item \textbf{Maintenance:} bug prediction, code review...
+	\end{itemize}
+\end{exampleblock}
+\end{frame}
+\begin{frame}{Machine Learning for Software Engineering}
+\begin{exampleblock}{How?~\cite{DBLP:journals/csur/KottiGS23}}
+\centering
+\includegraphics[width=0.9\textwidth]{img/distrubution.png}
+\end{exampleblock}
+\end{frame}
+\begin{frame}{Early approaches -- Evolutionary Algorithms}
+\begin{exampleblock}{What}
+	Evolutionary algorithms are a \emph{family} of optimization algorithms inspired by the process of natural evolution
+\end{exampleblock}
+\begin{exampleblock}{Where}
+	\begin{itemize}
+		\item Program \emph{synthesis} / \emph{sketching} (programming the unpromgrammable) -- \emph{Genetic Programming}.
+	
+		\item \emph{Test case generation} -- evolve test cases to maximize coverage.
+		\item \emph{Software fault prediction} -- mutate the code to find potential bugs.
+		\item Robotic desing -- \emph{automatic desing} of robots. 
+	\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Early approaches -- Supervised Learning}
+\begin{exampleblock}{Conde Summarization (CodeNN)~\cite{DBLP:conf/acl/IyerKCZ16}}
+\centering
+\includegraphics[width=0.8\textwidth]{img/codenn.png}
+\end{exampleblock}
+\end{frame}
+\begin{frame}{Early approeaches -- Supervised Learning}
+\begin{exampleblock}{Malware Detection~\cite{DBLP:journals/tii/CuiXCCWC18}}
+\centering
+\includegraphics[width=0.8\textwidth]{img/malware-detection.png}
+\end{exampleblock}
+\end{frame}
+\begin{frame}{Early approaches -- Unsupervised Learning}
+\begin{exampleblock}{Code Completion (kNN)~\cite{}}
+\centering
+\includegraphics[width=0.8\textwidth]{img/code-completions.png}
+\end{exampleblock}
+\end{frame}
+\begin{frame}{Early approaches -- Pitfalls}
+	\begin{itemize}
+		\item \textbf{Data scarcity:} software engineering data is scarce and expensive to collect, posing challenges for training effective models.
+		\item \textbf{Single-task models:} many models are designed for \emph{specific} tasks, limiting their broader \emph{applicability} and \emph{reuse}.
+		\item \textbf{Lack of generalization:} models often fail to \emph{generalize} across different software projects and domains.
+		\item \textbf{Human-computer interaction:} Early models did not adequately consider human factors, impacting \emph{usability} and \emph{adoption} in software development practices.
+	\end{itemize}
+\end{frame}
+\begin{frame}{Towards LLM solutions}
+	\begin{exampleblock}{Why?}
+		\begin{itemize}
+			\item \textbf{Code understanding}: LLMs, correctly trained, can understand code and its context.
+			\item \textbf{Code-Language link}: LLMs can link code to natural language, improving \emph{documentation} and \emph{understanding}.
+			\item \textbf{Session support}: LLMs can support developers during coding sessions, providing \emph{hints} and \emph{suggestions}.
+			\item \textbf{Testing support}: LLMs can generate \emph{test cases} and \emph{fault prediction}.
+			\item \textbf{One-model-for-all}: LLMs can be used for \emph{multiple} tasks, reducing the need for \emph{task-specific} models.
+			\item \textbf{Personalization}: LLMs can be personalized to the developer's \emph{style} and \emph{needs}.
+			\item \textbf{Human-level performance}: LLMs can achieve human-level performance in \emph{specific} tasks.
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+\begin{frame}[allowframebreaks]{LLM in SE -- Areas of Application}
+	\begin{exampleblock}{Requirement Engineering}
+			\begin{itemize}
+					\item \textbf{Ambiguity Resolution}: Enhancing clarity and understanding in requirements.
+					\item \textbf{Requirement Classification}: Categorizing requirements based on their nature and criticality.
+					\item \textbf{Requirement Analysis}: In-depth analysis to ensure requirements are feasible, relevant, and comprehensive.
+			\end{itemize}
+	\end{exampleblock}
+	
+	\begin{exampleblock}{Software Development}
+			\begin{itemize}
+					\item \textbf{Code Generation}: Automating the creation of code from specifications.
+					\item \textbf{Code Summarization}: Generating concise summaries of code blocks for easier understanding.
+					\item \textbf{Code Completion}: Predicting and providing code snippets to speed up development.
+			\end{itemize}
+	\end{exampleblock}
+
+	\framebreak
+
+	\begin{exampleblock}{Software Quality}
+			\begin{itemize}
+					\item \textbf{Test Generation}: Automatically creating tests to validate software functionality.
+					\item \textbf{Fault Prediction}: Identifying potential areas of the codebase that are prone to errors.
+					\item \textbf{Bug Localization}: Pinpointing the exact location of bugs in the codebase.
+			\end{itemize}
+	\end{exampleblock}
+
+	\begin{exampleblock}{Software Maintenance}
+			\begin{itemize}
+					\item \textbf{Code Review}: Automating the review process to identify potential issues.
+					\item \textbf{Bug Prediction}: Forecasting bugs in future iterations based on historical data.
+					\item \textbf{Refactoring}: Suggesting code improvements for better maintainability and performance.
+					\item \textbf{Commit Classification}: Categorizing commits for better project tracking and management.
+			\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Copilot}
+
+\end{frame}
+\begin{frame}{Copilot -- Report}
+\includegraphics[width=0.35\textwidth]{img/copilot-report-1.png}
+\includegraphics[width=0.55\textwidth]{img/copilot-report-2.png}
+\end{frame}
+\begin{frame}{Copilot -- Concerns}
+\includegraphics[width=\textwidth]{img/copilot-concerns.png}
+\end{frame}
+
+\begin{frame}{Interact with LLM}
+	\begin{itemize}
+		\item Via direct API: using the \emph{API} of the model, typically leveraging huggingface.
+		\item Via HTTP API: using a \emph{web service} that wraps the model.
+		\begin{itemize}
+			\item OpenAI as reference
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\begin{frame}{Ollama}
+
+\end{frame}
+\begin{frame}{LiteLLM}
+
+\end{frame}
 
 \section{LLMs for Software Testing}
 
+\begin{frame}{LLMs for Software Testing}
+
+\end{frame}
 \section{Innovative Solutions for LLMs -- autonomous agent models}
+\begin{frame}[plain]
+\centering
+\huge{LLM-Agent-Based Architectures}
+\large{ 
+Complex archictures that leverage LLMs to create autonomous agents that can interact with the \emph{environment} and other LLM-agents.
+}
+\end{frame}
+\begin{frame}{LLM-Agent -- Overview}
+
+\end{frame}
+\begin{frame}{LLM-Agent -- Modules}
+
+\end{frame}
+\begin{frame}{Meta GPT}
+
+\end{frame}
+\begin{frame}{Auto GPT}
+
+\end{frame}
+\begin{frame}{GPT-Engineering}
+
+\end{frame}
 %===============================================================================
 
 %/////////
