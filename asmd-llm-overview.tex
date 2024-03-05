@@ -364,7 +364,7 @@ Application of machine learning \emph{techniques} and \emph{methodologies} to ad
 \end{frame}
 
 \begin{frame}{Early approaches -- Supervised Learning}
-\begin{exampleblock}{Conde Summarization (CodeNN)~\cite{DBLP:conf/acl/IyerKCZ16}}
+\begin{exampleblock}{Code Summarization (CodeNN)~\cite{DBLP:conf/acl/IyerKCZ16}}
 \centering
 \includegraphics[width=0.8\textwidth]{img/codenn.png}
 \end{exampleblock}
@@ -541,6 +541,17 @@ Answers: 6, 6, 9 => the model selects 6
 \textbf{Technique:} Assign a specific perspective or character to the model. \\
 \emph{Example:} "As a nutritionist, list the benefits of a plant-based diet."
 \end{exampleblock}
+\begin{exampleblock}{ReAct~\cite{yao2022react}}
+\textbf{Technique:} Combines reasoning and action to create smarter, context-aware prompts by leveraging LLMs for generating reasoning traces and task-specific actions in an interleaved manner. \\
+\emph{Example}: 
+"Q: What is the capital of France?\\
+T-1: I need to find the capital city of France.\\
+A-1: Search[capital of France]\\
+O-1: The capital of France is Paris.\\
+T-2: The capital city of France is identified as Paris.\\
+A-2: Finish[Paris]
+"
+\end{exampleblock}
 \end{frame}
 \begin{frame}{Interact with LLM}
 	\begin{itemize}
@@ -594,17 +605,17 @@ Answers: 6, 6, 9 => the model selects 6
 	\begin{itemize}
 		\item Support several API providers (e.g., OpenAI, Ollama, etc.)
 		\item Support the combination of several processing steps (e.g., prompting, chaining, etc.)
-		\item Support the context retrival (e.g., RAG)
+		\item Support the context retrivial (e.g., RAG)
 	\end{itemize}
 \end{itemize}
 \begin{center}
 \huge{\textbf{Demo}}
 \end{center}
 \end{frame}
-\begin{frame}{Software Develpment -- Current Tools}
+\begin{frame}{Software Development -- Current Tools}
 \begin{exampleblock}{Desing guiding principles}
 	\begin{itemize}
-		\item \textbf{IDE-integrated:} sectionamless integration in IDEs.
+		\item \textbf{IDE-integrated:} seamless integration in IDEs.
 		\item \textbf{Agility:} Support for quick iterations and adaptability.
 		\item \textbf{Chat-oriented:} conversational interfaces for fast interactions.
 	\end{itemize}
@@ -710,20 +721,21 @@ Answers: 6, 6, 9 => the model selects 6
 Complex archictures that leverage LLMs to create autonomous agents that can interact with the \emph{environment} and other LLM-agents.
 }
 \end{frame}
-\begin{frame}{LLM-Agent -- Overview}
+\begin{frame}{LLM-Agent -- Overview~\cite{wang2023survey}}
 	\includegraphics[width=\textwidth]{img/number-of-papers.png}
 \end{frame}
 \begin{frame}{LLM-Agent -- Modules}
 	\includegraphics[width=\textwidth]{img/overview-agents.png}
 \end{frame}
-\begin{frame}{Meta GPT}
-
+\begin{frame}{Meta GPT~\cite{hong2023metagpt}}
+\includegraphics[width=\textwidth]{img/meta-gpt-idea.png}
 \end{frame}
-\begin{frame}{Auto GPT}
-
+\begin{frame}{Auto GPT~\footnote{\url{https://github.com/Significant-Gravitas/AutoGPT}}}
+	\centering
+\includegraphics[width=0.9\textwidth]{img/auto-gpt-loop.png}
 \end{frame}
-\begin{frame}{GPT-Engineering}
-
+\begin{frame}{AgentVerse~\cite{chen2023agentverse}}
+\includegraphics[width=\textwidth]{img/agent-verse.png}
 \end{frame}
 \begin{frame}{Conclusion}
 	\centering
